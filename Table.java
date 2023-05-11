@@ -90,16 +90,24 @@ public class Table {
     }
 
     // masa filtreleme fonksiyonu
-    public void filterTable(int bet, int tableType) {
+   public void filterTable(int bet, int tableType) {
         boolean found = false;
+        List<Integer> idList = new ArrayList<>();
         for (Table table : tableList) {
             if (table.getMinimumBet() <= bet && table.getMaximumBet() >= bet && table.getTableType() == tableType) {
                 int id = table.getTableID();
-                System.out.println(id + " numaralı masaya oturabilirsiniz.");
+                // store them in a list and according to the list print them
+                idList.add(id);
                 found = true;
             }
         }
-        if (!found) {
+        if (found) {
+            if (idList.size() == 1) {
+                System.out.println(idList.get(0) + " Numaralı masa, isteklerinize uygundur.");
+            } else {
+                System.out.println("Uygun masalar: " + idList);
+            }
+        } else {
             System.out.println("Uygun masa bulunamadı.");
         }
     }
